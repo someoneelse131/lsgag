@@ -1,33 +1,317 @@
-<!doctype html>
-<html class="no-js" lang="">
-
+<!DOCTYPE html>
+<html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-  <link rel="stylesheet" href="css/style.css">
-  <meta name="description" content="">
-
-  <meta property="og:title" content="">
-  <meta property="og:type" content="">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-  <meta property="og:image:alt" content="">
-
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" href="/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="icon.png">
-
-  <link rel="manifest" href="site.webmanifest">
-  <meta name="theme-color" content="#fafafa">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSG AG - Elektriker & Mechaniker Services</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">LSG AG</div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#services" class="nav-link">Dienstleistungen</a></li>
+                <li><a href="#about" class="nav-link">Über uns</a></li>
+                <li><a href="#contact" class="nav-link">Kontakt</a></li>
+                <li><a href="#jobs" class="nav-link">Stellenangebote</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
 
-  <!-- Add your site or application content here -->
-  <p>Hello world! This is HTML5 Boilerplate.</p>
-  <script src="js/app.js"></script>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="animated-bg">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="hero-content">
+            <h1>Professionelle Instandhaltungsarbeiten für höchste Ansprüche!</h1>
+            <p>24/7 Pikett-Dienst für Elektrik und Mechanik - Ihr verlässlicher Partner</p>
+            <a href="#contact" class="cta-button">Jetzt kontaktieren</a>
+        </div>
+    </section>
 
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Über LSG AG</h2>
+                <p>Sie sind auf der Suche nach einem verlässlichen Partner für sämtliche Instandhaltungsarbeiten? Dann sind Sie bei uns genau richtig!</p>
+                <p>Unser eingespieltes Team aus hochqualifizierten Fachkräften bietet Ihnen ein Rundum-sorglos-Paket: von der detaillierten Planung und fachgerechten Installation über die präzise Inbetriebnahme bis hin zur regelmäßigen Wartung und schnellen Störungsbehebung.</p>
+                <p>Wir sind überzeugt, dass wir gemeinsam die effektivsten und schnellsten Lösungen finden. Durch partnerschaftliche Zusammenarbeit und den Austausch unserer Expertise erreichen wir Ergebnisse, die den Unterschied machen.</p>
+            </div>
+            <div class="about-image">
+                <img src="images/team.jpg" alt="Unser Team">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h2 class="section-title">Unsere Dienstleistungen</h2>
+        <div class="services-grid">
+            <!-- Service 1 -->
+            <div class="service-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="service-icon">⚡</div>
+                        <h3>Elektroinstallationen</h3>
+                    </div>
+                    <div class="card-back">
+                        <p>Höchste Qualität, Sicherheit und Effizienz. Ob Neubau, Sanierung oder Modernisierung – wir planen, installieren und warten Ihre elektrischen Anlagen nach den neuesten Standards.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="service-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="service-icon">🔧</div>
+                        <h3>Mechanik Services</h3>
+                    </div>
+                    <div class="card-back">
+                        <p>Unsere erfahrenen Mechaniker sorgen dafür, dass Ihre Maschinen und Anlagen jederzeit optimal funktionieren. Regelmäßige Wartung und schnelle Reparaturen.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="service-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="service-icon">🚨</div>
+                        <h3>24/7 Pikett-Dienst</h3>
+                    </div>
+                    <div class="card-back">
+                        <p>Stillstand kann teuer werden – deshalb sind wir mit unserem 24-Stunden-Pikett-Dienst jederzeit einsatzbereit! Effiziente Fehleranalyse & nachhaltige Behebung.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="service-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="service-icon">🔄</div>
+                        <h3>Revisionen</h3>
+                    </div>
+                    <div class="card-back">
+                        <p>Fachgerechte Revisionen von Motoren und Pumpen. Umfassende Überprüfung, Wartung und Instandsetzung zur Verlängerung der Lebensdauer.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="service-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="service-icon">⚙️</div>
+                        <h3>Automation</h3>
+                    </div>
+                    <div class="card-back">
+                        <p>Hochqualifizierte Automatiker mit modernster Fernzugriffstechnologie für schnelle Fehlerdiagnose und effiziente Problemlösungen.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="service-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="service-icon">💻</div>
+                        <h3>Software Entwicklung</h3>
+                    </div>
+                    <div class="card-back">
+                        <p>Maßgeschneiderte Apps und Webseiten, Automatisierte Systeme zur Rechnungsstellung und Tools zur Optimierung von Prozessen.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 7 -->
+            <div class="service-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="service-icon">🔨</div>
+                        <h3>Montage & Anpassung</h3>
+                    </div>
+                    <div class="card-back">
+                        <p>Präzise Montage von Maschinen, Förderbändern und Anlagenmodulen. Integration mechanischer Bauteile in bestehende Systeme.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 8 -->
+            <div class="service-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="service-icon">📊</div>
+                        <h3>Steuerungstechnik</h3>
+                    </div>
+                    <div class="card-back">
+                        <p>Programmierung von Steuerungen in allen gängigen Installationssprachen: Honeywell, Siemens, Beckhoff und viele weitere.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 9 -->
+            <div class="service-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="service-icon">🛡️</div>
+                        <h3>Wartung & Support</h3>
+                    </div>
+                    <div class="card-back">
+                        <p>Regelmäßige Inspektion und Wartungen garantieren den sicheren und störungsfreien Betrieb Ihrer Systeme. Präventive Instandhaltung.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Carousel -->
+    <section class="image-carousel">
+        <h2 class="section-title">Unsere Projekte</h2>
+        <div class="carousel-container">
+            <div class="carousel-track">
+                <div class="carousel-slide">
+                    <img src="images/project1.jpg" alt="Projekt 1">
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/project2.jpg" alt="Projekt 2">
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/project3.jpg" alt="Projekt 3">
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/project4.jpg" alt="Projekt 4">
+                </div>
+                <!-- Duplicate for continuous scroll -->
+                <div class="carousel-slide">
+                    <img src="images/project1.jpg" alt="Projekt 1">
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/project2.jpg" alt="Projekt 2">
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/project3.jpg" alt="Projekt 3">
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/project4.jpg" alt="Projekt 4">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Kontaktieren Sie uns</h2>
+        <div class="contact-content">
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-Mail</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefon</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Nachricht</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Nachricht senden</button>
+                </form>
+            </div>
+            <div class="contact-info">
+                <h3>Kontaktinformationen</h3>
+                <div class="info-item">
+                    <span class="info-icon">📍</span>
+                    <div>
+                        <strong>Adresse</strong><br>
+                        Titlisweg 7<br>
+                        CH – 6020 Emmenbrücke
+                    </div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">📞</span>
+                    <div>
+                        <strong>Telefon</strong><br>
+                        041 / 260 20 25
+                    </div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">✉️</span>
+                    <div>
+                        <strong>E-Mail</strong><br>
+                        mail@lsgag.ch
+                    </div>
+                </div>
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2717.814887512346!2d8.269417315617565!3d47.08185897915257!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478ffc54a8e7d3e1%3A0x8b8c9e8e8e8e8e8e!2sTitlisweg%207%2C%206020%20Emmenbrücke!5e0!3m2!1sde!2sch!4v1620000000000!5m2!1sde!2sch"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jobs Section -->
+    <section class="about" id="jobs">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Stellenangebote</h2>
+                <p>Werden Sie Teil unseres Teams! Wir suchen qualifizierte Fachkräfte, die unser dynamisches Team verstärken möchten.</p>
+                <h3>Aktuelle Stellen:</h3>
+                <ul class="job-list">
+                    <li>
+                        <strong>• Elektriker/in EFZ</strong><br>
+                        <span class="job-details">Vollzeit - Emmenbrücke</span>
+                    </li>
+                    <li>
+                        <strong>• Mechaniker/in</strong><br>
+                        <span class="job-details">Vollzeit - Emmenbrücke</span>
+                    </li>
+                    <li>
+                        <strong>• Automatiker/in</strong><br>
+                        <span class="job-details">Vollzeit - Emmenbrücke</span>
+                    </li>
+                </ul>
+                <a href="#contact" class="cta-button">Jetzt bewerben</a>
+            </div>
+            <div class="about-image">
+                <img src="images/jobs.jpg" alt="Karriere bei LSG AG">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 LSG AG. Alle Rechte vorbehalten.</p>
+            <p>Ihr Partner für professionelle Instandhaltungsarbeiten</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
-
 </html>
