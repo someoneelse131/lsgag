@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  # Nginx Web Server
+  nginx:
+    image: nginx:alpine
+    container_name: lsgag_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/usr/share/nginx/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/certbot/conf:/etc/letsencrypt
+      - ./docker/certbot/www:/var/www/certbot
+    depends_on:
+      - php
+    networks:
+      - lsgag_network
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+  # PHP-FPM for API
+  php:
+    image: php:8.2-fpm-alpine
+    container_name: lsgag_php
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html
+    environment:
+      - DB_HOST=mysql
+      - DB_NAME=lsgag_db
+      - DB_USER=lsgag_user
+      - DB_PASSWORD=SecurePassword123!
+    depends_on:
+      - mysql
+    networks:
+      - lsgag_network
+    command: >
+      sh -c "docker-php-ext-install mysqli pdo pdo_mysql && php-fpm"
+
+  # MySQL Database (nur für Bilder und Stellen)
+  mysql:
+    image: mysql:8.0
+    container_name: lsgag_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: RootPassword123!
+      MYSQL_DATABASE: lsgag_db
+      MYSQL_USER: lsgag_user
+      MYSQL_PASSWORD: SecurePassword123!
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - lsgag_network
+
+  # Certbot for Let's Encrypt SSL
+  certbot:
+    image: certbot/certbot
+    container_name: lsgag_certbot
+    restart: unless-stopped
+    volumes:
+      - ./docker/certbot/conf:/etc/letsencrypt
+      - ./docker/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    networks:
+      - lsgag_network
+
+volumes:
+  mysql_data:
+
+networks:
+  lsgag_network:
+    driver: bridge
