@@ -1,73 +1,64 @@
-# HTTP server block - redirects to HTTPS
-server {
-    listen 80;
-    server_name lsgag.chiaruzzi.ch;
+-- Erstelle Datenbank
+CREATE DATABASE IF NOT EXISTS lsgag_db;
+USE lsgag_db;
 
-    location /.well-known/acme-challenge/ {
-        root /var/www/certbot;
-    }
+-- Tabelle für Projektbilder
+CREATE TABLE IF NOT EXISTS project_images (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    filename VARCHAR(255) NOT NULL,
+    description TEXT,
+    sort_order INT DEFAULT 0,
+    active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
-    location / {
-        return 301 https://$server_name$request_uri;
-    }
-}
+-- Tabelle für Stellenangebote
+CREATE TABLE IF NOT EXISTS jobs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    type VARCHAR(100) NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    description TEXT,
+    requirements TEXT,
+    sort_order INT DEFAULT 0,
+    active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
 
-# HTTPS server block
-server {
-    listen 443 ssl;
-    server_name lsgag.chiaruzzi.ch;
+-- Beispiel-Stellenangebote einfügen
+INSERT INTO jobs (title, type, location, description, requirements, sort_order) VALUES
+('Elektriker/in EFZ', 'Vollzeit', 'Emmenbrücke',
+ 'Wir suchen einen qualifizierten Elektriker für unser Team. Zu Ihren Aufgaben gehören Installation, Wartung und Reparatur elektrischer Anlagen.',
+ 'Abgeschlossene Lehre als Elektriker/in EFZ, Berufserfahrung von Vorteil, Führerschein Kategorie B', 1),
 
-    # SSL configuration
-    ssl_certificate /etc/letsencrypt/live/lsgag.chiaruzzi.ch/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/lsgag.chiaruzzi.ch/privkey.pem;
+('Mechaniker/in', 'Vollzeit', 'Emmenbrücke',
+ 'Verstärken Sie unser Mechaniker-Team. Sie sind verantwortlich für Wartung und Reparatur mechanischer Anlagen.',
+ 'Technische Ausbildung im Bereich Mechanik, Selbständige Arbeitsweise, Teamfähigkeit', 2),
 
-    # Security headers
-    add_header X-Frame-Options "SAMEORIGIN" always;
-    add_header X-Content-Type-Options "nosniff" always;
-    add_header X-XSS-Protection "1; mode=block" always;
+('Automatiker/in', 'Vollzeit', 'Emmenbrücke',
+ 'Für unsere Automation-Abteilung suchen wir eine/n erfahrene/n Automatiker/in.',
+ 'Erfahrung mit SPS-Programmierung (Siemens, Beckhoff), Gute Deutschkenntnisse, Bereitschaft für Pikett-Dienst', 3);
 
-    root /usr/share/nginx/html;
-    index index.html;
+-- Beispiel-Bilder einfügen (Pfade anpassen)
+INSERT INTO project_images (title, filename, description, sort_order) VALUES
+('Elektrische Installation', 'projekt1.jpg', 'Moderne Elektroinstallation in Industrieanlage', 1),
+('Schaltschrankbau', 'projekt2.jpg', 'Professioneller Schaltschrankbau nach Mass', 2),
+('Automation Projekt', 'projekt3.jpg', 'SPS-Programmierung und Inbetriebnahme', 3),
+('Mechanische Wartung', 'projekt4.jpg', 'Präventive Wartung von Produktionsanlagen', 4);
 
-    # Main location
-    location / {
-        try_files $uri $uri/ /index.html;
-    }
+-- NEU: Tabelle für Benutzer
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(50) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 
-    # API endpoints for jobs and images only
-    location ~ ^/api/(jobs|images)\.php$ {
-        try_files $uri =404;
-        fastcgi_pass php:9000;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME /var/www/html$fastcgi_script_name;
-        include fastcgi_params;
-    }
-
-    # Static files
-    location ~* \.(jpg|jpeg|png|gif|ico|css|js|svg|webmanifest)$ {
-        expires 30d;
-        add_header Cache-Control "public, immutable";
-    }
-
-    # Deny access to hidden files
-    location ~ /\. {
-        deny all;
-    }
-}
-
-# Initial setup without SSL (use this first to get certificates)
-# server {
-#     listen 80;
-#     server_name lsgag.chiaruzzi.ch;
-#
-#     root /usr/share/nginx/html;
-#     index index.html;
-#
-#     location /.well-known/acme-challenge/ {
-#         root /var/www/certbot;
-#     }
-#
-#     location / {
-#         try_files $uri $uri/ /index.html;
-#     }
-# }
+-- Admin-User nur hinzufügen, wenn noch nicht vorhanden
+INSERT INTO users (username, password)
+SELECT 'admin', '$2y$10$eImiTXuWVxfM37uY4JANjQ6Yc7XgFQ/KD2k3r/d5eB7E4EXAMPLE'
+WHERE NOT EXISTS (
+  SELECT 1 FROM users WHERE username = 'admin'
+);
